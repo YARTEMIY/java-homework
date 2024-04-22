@@ -7,20 +7,20 @@ import org.junit.jupiter.api.Assertions;
 
 class IntHolder {
 
-    private int value_;
+    private int value;
 
     public IntHolder(int value) {
-        this.value_ = value;
+        this.value = value;
     }
 
     public int getValue() {
-        return this.value_;
+        return this.value;
     }
 
     public void swap(IntHolder other) {
-        int temp = this.value_;
-        this.value_ = other.value_;
-        other.value_ = temp;
+        int temp = this.value;
+        this.value = other.value;
+        other.value = temp;
     }
 
     public static IntHolder valueOf(int x) {
@@ -28,19 +28,19 @@ class IntHolder {
     }
 
     public IntHolder plus(IntHolder rhv) {
-        return new IntHolder(this.value_ + rhv.value_);
+        return new IntHolder(this.value + rhv.value);
     }
 
     public IntHolder minus(IntHolder rhv) {
-        return new IntHolder(this.value_ - rhv.value_);
+        return new IntHolder(this.value - rhv.value);
     }
 
     public IntHolder times(IntHolder rhv) {
-        return new IntHolder(this.value_ * rhv.value_);
+        return new IntHolder(this.value * rhv.value);
     }
 
     public IntHolder div(IntHolder rhv) {
-        return new IntHolder(this.value_ / rhv.value_);
+        return new IntHolder(this.value / rhv.value);
     }
 
     @Override
@@ -54,12 +54,12 @@ class IntHolder {
         }
 
         IntHolder rhv = (IntHolder) obj;
-        return this.value_ == rhv.value_;
+        return this.value == rhv.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value_);
+        return Objects.hash(value);
     }
 }
 
