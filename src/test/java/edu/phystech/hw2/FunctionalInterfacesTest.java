@@ -1,6 +1,5 @@
 package edu.phystech.hw2;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BinaryOperator;
@@ -15,7 +14,7 @@ import org.junit.jupiter.api.Assertions;
 class ToUpperCaseOperator implements UnaryOperator<String> {
     @Override
     public String apply(String s) {
-        return s;
+        return s.toUpperCase();
     }
 }
 
@@ -24,7 +23,7 @@ class AbsMaxOperator implements BinaryOperator<Integer> {
 
     @Override
     public Integer apply(Integer integer, Integer integer2) {
-        return 0;
+        return Math.max(Math.abs(integer), Math.abs(integer2));
     }
 }
 
@@ -32,28 +31,39 @@ class StringLengthMoreThan5 implements Predicate<String> {
 
     @Override
     public boolean test(String s) {
-        return true;
+        return s.length() > 5;
     }
 }
-
 
 // Проверяет, является ли число квадратом
 class IsNumberASquareOfAnotherNumber implements Predicate<Integer> {
 
     @Override
     public boolean test(Integer integer) {
-        return true;
+        double sqrt = Math.sqrt(integer);
+        return sqrt * sqrt == integer;
     }
 }
 
-// Возвращает четные числа, начиная с from включительно, если в from нечетное число, то начиная с первого четного с from
+// Возвращает четные числа, начиная с from включительно, если в from нечетное
+// число, то начиная с первого четного с from
 class EvenNumberSupplier implements Supplier<Integer> {
 
-    public EvenNumberSupplier(int from) {}
+    private int number;
+
+    public EvenNumberSupplier(int from) {
+        if (from % 2 == 0) {
+            this.number = from;
+        } else {
+            this.number = from + 1;
+        }
+    }
 
     @Override
     public Integer get() {
-        return 0;
+        int answer = this.number;
+        this.number += 2;
+        return answer;
     }
 }
 
@@ -76,13 +86,11 @@ public class FunctionalInterfacesTest {
     public void predicateTest() {
         Assertions.assertEquals(
                 Stream.of("a", "bb", "ccc", "1234567", "aaaaaaaaa").filter(new StringLengthMoreThan5()).toList(),
-                List.of("1234567", "aaaaaaaaa")
-        );
+                List.of("1234567", "aaaaaaaaa"));
 
         Assertions.assertEquals(
                 Stream.of(1, 4, 5, 10, 16, 25).filter(new IsNumberASquareOfAnotherNumber()).toList(),
-                List.of(1, 4, 16, 25)
-        );
+                List.of(1, 4, 16, 25));
     }
 
     @Test
