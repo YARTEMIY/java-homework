@@ -17,9 +17,11 @@ public class Stepper {
     private final Object lock = new Object();
     private boolean isLeftTurn = true;
 
-    public void leftStep() {}
+    public void leftStep() {
+    }
 
-    public void rightStep()  {}
+    public void rightStep() {
+    }
 
     public List<Side> getHistory() {
         return history;
